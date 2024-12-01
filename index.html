@@ -1,85 +1,130 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Política de Privacidad - Budgetz</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-            padding: 0;
-            color: #333;
-        }
-        h1, h2 {
-            color: #4A90E2;
-        }
-        a {
-            color: #4A90E2;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear Producto Global</title>
+  <!-- Firebase CDN -->
+  <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-storage-compat.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f5f0;
+    }
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #66bb6a;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #57a55b;
+    }
+  </style>
 </head>
 <body>
-    <h1>Política de Privacidad</h1>
-    <p>En <strong>Budgetz</strong>, entendemos la importancia de tu privacidad y estamos comprometidos a proteger la información personal que compartes con nosotros. Esta Política de Privacidad describe cómo recopilamos, usamos y protegemos tus datos.</p>
+  <form id="productForm">
+    <h2>Crear Producto Global</h2>
+    <label for="name">Nombre del Producto</label>
+    <input type="text" id="name" placeholder="Nombre del producto" required />
 
-    <h2>1. Información que recopilamos</h2>
-    <p>Podemos recopilar los siguientes tipos de datos:</p>
-    <ul>
-        <li><strong>Información personal:</strong> Datos como tu nombre, dirección de correo electrónico, y otra información que proporciones al registrarte o iniciar sesión mediante Google.</li>
-        <li><strong>Datos financieros:</strong> Información sobre tus ingresos, gastos, presupuestos y metas financieras, que ingreses en la aplicación.</li>
-        <li><strong>Información del dispositivo:</strong> Datos como el modelo del dispositivo, sistema operativo, y dirección IP para garantizar la funcionalidad de la app.</li>
-        <li><strong>Notificaciones:</strong> Información relacionada con las alertas y recordatorios enviados a través de notificaciones push.</li>
-    </ul>
+    <label for="description">Descripción</label>
+    <textarea id="description" placeholder="Descripción del producto" rows="3" required></textarea>
 
-    <h2>2. Cómo usamos tu información</h2>
-    <p>Utilizamos la información que recopilamos para los siguientes propósitos:</p>
-    <ul>
-        <li>Proporcionar y mejorar los servicios de Budgetz.</li>
-        <li>Ayudarte a gestionar tus finanzas personales, como presupuestos y metas de ahorro.</li>
-        <li>Enviar notificaciones sobre alertas de presupuesto y recordatorios de pagos.</li>
-        <li>Proporcionar asistencia técnica y soporte al cliente.</li>
-        <li>Cumplir con requisitos legales y normativos.</li>
-    </ul>
+    <label for="price">Precio</label>
+    <input type="number" id="price" placeholder="Precio del producto" step="0.01" required />
 
-    <h2>3. Compartir tu información</h2>
-    <p>Solo compartimos tu información en las siguientes circunstancias:</p>
-    <ul>
-        <li>Con proveedores de servicios de terceros necesarios para el funcionamiento de la aplicación, como Firebase para almacenamiento y autenticación.</li>
-        <li>Cuando sea requerido por la ley o para proteger nuestros derechos legales.</li>
-        <li>Con tu consentimiento explícito para fines específicos.</li>
-    </ul>
+    <label for="image">Subir Imagen</label>
+    <input type="file" id="image" accept="image/*" required />
 
-    <h2>4. Almacenamiento y seguridad de los datos</h2>
-    <p>Tus datos se almacenan de forma segura en servidores de terceros como Firebase. Implementamos medidas de seguridad técnicas y organizativas para proteger tu información contra el acceso no autorizado, la pérdida o el uso indebido.</p>
+    <button type="button" id="submitBtn">Crear Producto</button>
+  </form>
 
-    <h2>5. Servicios de terceros</h2>
-    <p>Budgetz utiliza servicios de terceros para mejorar la funcionalidad de la aplicación. Estos servicios pueden recopilar información según sus propias políticas de privacidad. Los principales servicios utilizados incluyen:</p>
-    <ul>
-        <li><a href="https://firebase.google.com/support/privacy" target="_blank">Firebase</a> para autenticación, base de datos y notificaciones.</li>
-        <li><a href="https://policies.google.com/privacy" target="_blank">Google Sign-In</a> para el inicio de sesión.</li>
-    </ul>
+  <script>
+    // Configuración de Firebase
+    const firebaseConfig = {
+      apiKey: "TU_API_KEY",
+      authDomain: "TU_AUTH_DOMAIN",
+      projectId: "TU_PROJECT_ID",
+      storageBucket: "TU_STORAGE_BUCKET",
+      messagingSenderId: "TU_MESSAGING_SENDER_ID",
+      appId: "TU_APP_ID",
+    };
 
-    <h2>6. Derechos del usuario</h2>
-    <p>Como usuario, tienes los siguientes derechos:</p>
-    <ul>
-        <li>Acceder, corregir o eliminar tus datos personales.</li>
-        <li>Solicitar la portabilidad de tus datos.</li>
-        <li>Revocar tu consentimiento para el procesamiento de datos en cualquier momento.</li>
-    </ul>
-    <p>Para ejercer estos derechos, contáctanos a través de <a href="mailto:cloudquetzal@gmail.com">cloudquetzal@gmail.com</a>.</p>
+    // Inicializar Firebase (usando compatibilidad para evitar errores)
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const storage = firebase.storage();
 
-    <h2>7. Cambios en esta política</h2>
-    <p>Nos reservamos el derecho de actualizar esta Política de Privacidad en cualquier momento. Te notificaremos sobre cualquier cambio importante a través de la aplicación o por otros medios apropiados.</p>
+    // Referencias a los elementos del formulario
+    const form = document.getElementById("productForm");
+    const nameInput = document.getElementById("name");
+    const descriptionInput = document.getElementById("description");
+    const priceInput = document.getElementById("price");
+    const imageInput = document.getElementById("image");
+    const submitBtn = document.getElementById("submitBtn");
 
-    <h2>8. Contacto</h2>
-    <p>Si tienes preguntas o inquietudes sobre esta Política de Privacidad, puedes contactarnos en:</p>
-    <p><strong>Email:</strong> <a href="mailto:cloudquetzal@gmail.com">cloudquetzal@gmail.com</a></p>
-    <p><strong>Dirección:</strong> Guatemala</p>
+    // Manejar el envío del formulario
+    submitBtn.addEventListener("click", async () => {
+      const name = nameInput.value;
+      const description = descriptionInput.value;
+      const price = parseFloat(priceInput.value);
+      const imageFile = imageInput.files[0];
+
+      if (!name || !description || !price || !imageFile) {
+        alert("Por favor, completa todos los campos.");
+        return;
+      }
+
+      try {
+        // Subir la imagen a Firebase Storage
+        const storageRef = storage.ref(`global_products/${imageFile.name}`);
+        const snapshot = await storageRef.put(imageFile);
+        const imageUrl = await snapshot.ref.getDownloadURL();
+
+        // Guardar los datos en Firestore
+        await db.collection("global_products").add({
+          name,
+          description,
+          price,
+          imageUrl,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        });
+
+        alert("Producto creado exitosamente.");
+        form.reset();
+      } catch (error) {
+        console.error("Error al crear el producto:", error);
+        alert("Hubo un error al crear el producto. Inténtalo de nuevo.");
+      }
+    });
+  </script>
 </body>
 </html>
